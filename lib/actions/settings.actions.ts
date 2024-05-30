@@ -3,7 +3,6 @@
 import * as z from "zod";
 import bcrypt from "bcryptjs";
 
-import { unstable_update } from "@/auth";
 import { db } from "@/lib/db";
 import { SettingsSchema } from "@/schemas";
 import { getUserById, getUserByEmail } from "@/lib/actions/user.actions";
