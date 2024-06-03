@@ -10,6 +10,7 @@ export const ButtonList = () => {
         { href: "/client", text: "Client" },
         { href: "/admin", text: "Admin" },
         { href: "/settings", text: "Einstellungen" },
+        { href: "/hub/hub-client", text: "HUB"},
     ];
 
     return (

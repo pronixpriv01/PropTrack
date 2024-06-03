@@ -1,17 +1,17 @@
 export const sidebarLinks = [
     {
         icon: "/icons/layout-dashboard.svg",
-        route: "/",
+        route: "/hub/dashboard",
         label: "Dashboard",
     },
     {
         icon: "/icons/layout-list.svg",
-        route: "/tasks",
+        route: "/hub/tasks",
         label: "Tasks",
     },
     {
         icon: "/icons/land-plot.svg",
-        route: "/properties",
+        route: "/hub/properties",
         label: "Properties",
     },
     {
@@ -21,7 +21,7 @@ export const sidebarLinks = [
     },
     {
         icon: "/icons/user.svg",
-        route: "/profile",
-        label: "Profile",
+        route: "/hub/hub-client",
+        label: "Profil",
     },
 ]
