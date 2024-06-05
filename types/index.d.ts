@@ -1,7 +1,11 @@
+
 declare type SearchParamProps = {
   params: { [key: string]: string };
   searchParams: { [key: string]: string | string[] | undefined };
 };
+
+type AccountRoles = "Manager Developer" | "Marketing" | "Developer" | "DevOps" | "Mobile Dev" | "CEO" | "TestUser";
+
 
 declare type SignUpParams = {
   firstName: string;
@@ -107,6 +111,31 @@ declare interface User {
   properties: Property[];
 }
 
+declare interface CatergoryBadgeProps {
+  category: string;
+}
+
+declare interface UserNotificationProps {
+  id: string;
+  category: string;
+  message: string;
+  date: string;
+  status: "read" | "unread";
+}
+
+declare interface NotificationCardProps {
+  notifications: UserNotificationProps[];
+}
+
+declare interface NotificationsTableProps {
+  notifications: UserNotificationProps[];
+}
+
+declare interface RightSidebarProps {
+  user: ExtendedUser;
+  scheduleItems: ScheduleItem[];
+}
+
 declare interface SidebarProps {
   user: User;
 }
@@ -155,4 +184,19 @@ declare interface HeaderBoxProps {
   title: string;
   subtext: string;
   user?: string;
+}
+
+declare interface ScheduleEventProps {
+  time: string;
+  title: string;
+  participants: string[];
+}
+
+declare interface ScheduleItemsProps {
+  date: string;
+  events: ScheduleEventProps[];
+}
+
+declare interface ScheduleCardProps {
+  scheduleItemsProps: ScheduleItemsProps[];
 }

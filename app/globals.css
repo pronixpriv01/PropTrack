@@ -132,6 +132,23 @@ body,
     @apply text-16 font-semibold text-black max-xl:hidden;
   }
 
+  .sidebar-btn_bg {
+    @apply bg-sky-500;
+  }
+
+  /* Home */
+  .home {
+    @apply no-scrollbar flex w-full flex-row max-xl:max-h-screen max-xl:overflow-y-scroll;
+  }
+
+  .home-content {
+    @apply no-scrollbar flex w-full flex-1 flex-col gap-8 px-5 sm:px-8 py-7 lg:py-12 xl:max-h-screen xl:overflow-y-scroll;
+  }
+
+  .home-header {
+    @apply flex flex-col justify-between gap-8;
+  }
+
   /* Mobile Nav */
   .mobilenav-sheet {
     @apply flex h-[calc(100vh-72px)] flex-col justify-between overflow-y-auto;
@@ -159,6 +176,19 @@ body,
 
   .flex-center {
     @apply flex items-center justify-center;
+  }
+
+  /* Header Box */
+  .header-box {
+    @apply flex flex-col gap-1;
+  }
+
+  .header-box-title {
+    @apply text-24 lg:text-30 font-semibold text-gray-900;
+  }
+
+  .header-box-subtext {
+    @apply text-14 lg:text-16 font-normal text-gray-600;
   }
 
   .header-2 {
@@ -204,4 +234,62 @@ body,
   .text-36 {
     @apply text-[36px] leading-[44px];
   }
+
+  /* Right sidebar */
+  .right-sidebar {
+    @apply no-scrollbar px-8 hidden h-screen max-h-screen flex-col border-l border-gray-200 xl:flex w-[500px] xl:overflow-y-scroll !important;
+  }
+
+  .profile-banner {
+    @apply h-[120px] w-full bg-cover bg-no-repeat;
+  }
+
+  .profile {
+    @apply relative flex px-6 max-xl:justify-center;
+  }
+
+  .profile-img {
+    @apply flex-center absolute -top-8 size-24 rounded-full bg-gray-100 border-8 border-white p-2;
+  }
+
+  .profile-details {
+    @apply flex flex-col pt-24;
+  }
+
+  .profile-name {
+    @apply text-24 font-semibold text-gray-900;
+  }
+
+  .profile-email {
+    @apply text-16 font-normal text-gray-600;
+  }
+
+  .schedule-date_container {
+    @apply flex flex-row
+  }
+
+  .schedule-item {
+    @apply flex mb-4 mt-6 w-[290px] h-[62px];
+  }
+
+  .schedule-time {
+      @apply w-80 flex justify-between items-center;
+  }
+
+  .schedule-details {
+      @apply flex-grow border-l-[3px] border-neutral-600 pl-2;
+  }
+
+  .schedule-title {
+      @apply font-semibold text-sm;
+  }
+
+  .schedule-participants {
+      @apply italic text-sm w-[200px];
+  }
+
+  .schedule-description {
+      @apply mt-1 size-[12px];
+  }
+
 }

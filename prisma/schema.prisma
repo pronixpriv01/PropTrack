@@ -12,6 +12,13 @@ datasource db {
 enum UserRole {
   ADMIN
   USER
+  MANAGER_DEVELOPER
+  MARKETING
+  DEVELOPER
+  DEVOPS
+  MOBILE_DEV
+  CEO
+  TEST_USER
 }
 
 model User {
@@ -25,6 +32,7 @@ model User {
   accounts Account[]
   isTwoFactorEnabled Boolean @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
+  notifications Notification[]
 }
 
 model Account {
@@ -82,6 +90,17 @@ model TwoFactorConfirmation {
   @@unique([userId])
 }
 
+
+model Notification {
+  id String @id @default(cuid())
+  userId String
+  category String
+  message String
+  date DateTime
+  status String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
 // model User {
 //   userId   String   @id @default(auto()) @map("_id") @db.ObjectId
 //   name     String
