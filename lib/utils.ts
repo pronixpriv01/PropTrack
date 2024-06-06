@@ -8,27 +8,28 @@ export function cn(...inputs: ClassValue[]) {
 /* eslint-disable no-prototype-builtins */
 import qs from "query-string";
 import { z } from "zod";
+import { notificationsCategoryStyles } from "@/constants";
 
 // FORMAT DATE TIME
 export const formatDateTime = (dateString: Date) => {
   const dateTimeOptions: Intl.DateTimeFormatOptions = {
-    weekday: "short", // abbreviated weekday name (e.g., 'Mon')
-    month: "short", // abbreviated month name (e.g., 'Oct')
+    weekday: "short", // abbreviated weekday name (e.g., 'Mo.')
+    month: "short", // abbreviated month name (e.g., 'Okt.')
     day: "numeric", // numeric day of the month (e.g., '25')
     hour: "numeric", // numeric hour (e.g., '8')
     minute: "numeric", // numeric minute (e.g., '30')
-    hour12: true, // use 12-hour clock (true) or 24-hour clock (false)
+    hour12: false, // use 12-hour clock (true) or 24-hour clock (false)
   };
 
   const dateDayOptions: Intl.DateTimeFormatOptions = {
-    weekday: "short", // abbreviated weekday name (e.g., 'Mon')
+    weekday: "short", // abbreviated weekday name (e.g., 'Mo.')
     year: "numeric", // numeric year (e.g., '2023')
-    month: "2-digit", // abbreviated month name (e.g., 'Oct')
+    month: "2-digit", // numeric month (e.g., '10')
     day: "2-digit", // numeric day of the month (e.g., '25')
   };
 
   const dateOptions: Intl.DateTimeFormatOptions = {
-    month: "short", // abbreviated month name (e.g., 'Oct')
+    month: "short", // abbreviated month name (e.g., 'Okt.')
     year: "numeric", // numeric year (e.g., '2023')
     day: "numeric", // numeric day of the month (e.g., '25')
   };
@@ -36,26 +37,26 @@ export const formatDateTime = (dateString: Date) => {
   const timeOptions: Intl.DateTimeFormatOptions = {
     hour: "numeric", // numeric hour (e.g., '8')
     minute: "numeric", // numeric minute (e.g., '30')
-    hour12: true, // use 12-hour clock (true) or 24-hour clock (false)
+    hour12: false, // use 12-hour clock (true) or 24-hour clock (false)
   };
 
   const formattedDateTime: string = new Date(dateString).toLocaleString(
-    "en-US",
+    "de-DE",
     dateTimeOptions
   );
 
   const formattedDateDay: string = new Date(dateString).toLocaleString(
-    "en-US",
+    "de-DE",
     dateDayOptions
   );
 
   const formattedDate: string = new Date(dateString).toLocaleString(
-    "en-US",
+    "de-DE",
     dateOptions
   );
 
   const formattedTime: string = new Date(dateString).toLocaleString(
-    "en-US",
+    "de-DE",
     timeOptions
   );
 
@@ -103,7 +104,7 @@ export function formUrlQuery({ params, key, value }: UrlQueryParams) {
   );
 }
 
-export function getAccountRoleStyles(role: AccountRoles) {
+export function getAccountRoleStyles(role: AccountRoles): AccountRoleStyles {
   switch (role) {
     case "Manager Developer":
       return {
@@ -171,6 +172,34 @@ export function getAccountRoleStyles(role: AccountRoles) {
   }
 }
 
+export function getEventCategoryStyles(category: string) {
+  switch (category) {
+    case "Interview":
+      return "bg-blue-500"; // Hier wird nur die linke Border gefärbt
+    case "Meeting":
+      return "bg-red-500"; // Hier wird nur die linke Border gefärbt
+    case "Discussion":
+      return "bg-green-500"; // Hier wird nur die linke Border gefärbt
+    default:
+      return "bg-gray-500"; // Fallback für andere Kategorien
+  }
+}
+
+export function getNotificationStyle(category: string, type: NotificationType): any {
+  switch (type) {
+    case "AccountRole":
+      return getAccountRoleStyles(category as AccountRoles);
+
+    case "Reminder":
+      return notificationsCategoryStyles["Reminder"];
+
+    case "Notification":
+      return notificationsCategoryStyles["Update"];
+
+    default:
+      return notificationsCategoryStyles["default"];
+  }
+}
 
 // export function countTransactionCategories(
 //   transactions: Transaction[]

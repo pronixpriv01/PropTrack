@@ -268,6 +268,8 @@ body,
     @apply flex flex-row
   }
 
+
+
   .schedule-item {
     @apply flex mb-4 mt-6 w-[290px] h-[62px];
   }
@@ -278,6 +280,10 @@ body,
 
   .schedule-details {
       @apply flex-grow border-l-[3px] border-neutral-600 pl-2;
+  }
+
+  .border-interview {
+      @apply border-l-[3px] 
   }
 
   .schedule-title {

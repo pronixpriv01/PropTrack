@@ -5,29 +5,11 @@ import { NotificationCard } from "../_components/NotificationCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import RightSidebar from "../_components/RightSidebar";
 import dummyScheduleItems from "@/lib/dummyScheduleItems";
+import { dummyNotifications } from "@/lib/dummyNotifications";
 
 const Dashboard = async ({ searchParams: { id, page} }: SearchParamProps) => {
     const currentPage = Number(page as string) || 1;
     const user = await currentUser();
-
-    const notifications: UserNotificationProps[] = [
-        {
-          id: "1",
-          category: "CEO",
-          message: "Andi Restu sent you a message",
-          date: "2022-08-08T07:00:00Z",
-          status: "unread",
-        },
-        {
-          id: "2",
-          category: "Reminder",
-          message: "Enter new employee data in system",
-          date: "2022-08-07T16:00:00Z",
-          status: "read",
-        },
-        // Weitere Benachrichtigungen hier hinzufügen
-      ];
-
 
     return (
         <section className="home">
@@ -41,7 +23,7 @@ const Dashboard = async ({ searchParams: { id, page} }: SearchParamProps) => {
                     />
                 </header>
                 
-                <NotificationCard notifications={notifications} />
+                <NotificationCard notifications={dummyNotifications} />
             </div>
             <RightSidebar user={user} scheduleItems={dummyScheduleItems} />
         </section>
