@@ -11,6 +11,9 @@ type AccountRoles = "Manager Developer" | "Marketing" | "Developer" | "DevOps" |
 // Definition der Benachrichtigungstypen
 type NotificationType = "AccountRole" | "Reminder" | "Notification";
 
+// Definition der Badge-Variant
+type VariantType = "default" | "secondary" | "success" | "reminder" | "message" | "notification";
+
 // Definition von Event-Kategorien und -Typen
 type EventCategory = "Meeting" | "Interview" | "Discussion" | "Other";
 type EventType = "Monthly Meeting" | "Psychological Test" | "Mid-year discussion" | "Other";
@@ -158,7 +161,7 @@ declare interface UserNotificationProps {
   id: string;
   category: string;
   message: string;
-  date: string;
+  date: Date;
   status: "read" | "unread";
   type: NotificationType;
 }

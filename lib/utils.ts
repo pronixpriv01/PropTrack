@@ -68,6 +68,26 @@ export const formatDateTime = (dateString: Date) => {
   };
 };
 
+export function formatTimeAgo(date: Date): string {
+  const now: Date = new Date();
+  const diff: number = now.getTime() - date.getTime();
+
+  const seconds: number = Math.floor(diff / 1000);
+  const minutes: number = Math.floor(seconds / 60);
+  const hours: number = Math.floor(minutes / 60);
+  const days: number = Math.floor(hours / 24);
+
+  if (seconds < 60) {
+    return 'vor weniger als einer Minute';
+  } else if (minutes <60) {
+    return `vor ${minutes} Minute${minutes === 1 ? '' : 'n'}`;
+  } else if (hours < 24) {
+    return `vor ${hours} Stunde${hours === 1 ? '' : 'n'}`;
+  } else {
+    return `vor ${days} Tag${days === 1 ? '' : 'en'}`;
+  }
+}
+
 export function formatAmount(amount: number): string {
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",

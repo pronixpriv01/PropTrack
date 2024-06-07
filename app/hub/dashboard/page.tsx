@@ -1,8 +1,6 @@
 import HeaderBox from "@/components/HeaderBox";
 import { currentUser } from "@/lib/auth";
-import NotificationsTable from "../_components/NotificationsTable";
 import { NotificationCard } from "../_components/NotificationCard";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import RightSidebar from "../_components/RightSidebar";
 import dummyScheduleItems from "@/lib/dummyScheduleItems";
 import { dummyNotifications } from "@/lib/dummyNotifications";
