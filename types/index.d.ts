@@ -133,6 +133,13 @@ declare interface User {
   properties: Property[];
 }
 
+// Schnittstelle für Kategorie-Select
+declare interface CategorySelectProps {
+  categories: EventCategory[];
+  selectedCategory: EventCategory;
+  onChange: (category: EventCategory) => void;
+}
+
 // Schnittstelle für Kategorie-Badge
 declare interface CategoryBadgeProps {
   category: string;

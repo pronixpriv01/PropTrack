@@ -4,21 +4,28 @@ const DynamicBadge = ({ category, type }: DynamicBadgeProps) => {
     const badgeVariant = determineBadgeVariant(category, type);
   
     return (
-      <Badge variant={badgeVariant}>
+      <Badge 
+        className="cursor-pointer"
+        variant={badgeVariant}>
         {category}
       </Badge>
     );
   };
   
   function determineBadgeVariant(category: string, type: "AccountRole" | "Reminder" | "Notification") {
-    // Logik zur Bestimmung des Variantenwertes basierend auf category und type
-    // Hier ein Beispiel:
     if (type === "AccountRole") {
-      return "success"; // Annahme: AccountRole sollte immer die success-Variante haben
+        switch (category) {
+            case "Manager Developer":
+                return "success";
+            case "Marketing":
+                return "secondary";
+            default:
+                return "default";
+        }
     } else if (type === "Reminder") {
-      return "default"; // Annahme: Reminder sollte immer die default-Variante haben
+        return "default";
     } else {
-      return "default"; // Annahme: Andere Typen verwenden die default-Variante
+        return "default";
     }
   }
   

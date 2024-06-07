@@ -7,10 +7,7 @@ import {
     TableHeader,
     TableRow,
   } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
-import { notificationsCategoryStyles } from "@/constants";
 import { cn, formatDateTime, removeSpecialCharacters } from "@/lib/utils";
-import CategoryBadge from "./CategoryBadge";
 import DynamicBadge from "./DynamicBadge";
 
 const NotificationsTable = ({ notifications }: NotificationsTableProps) => {
@@ -20,7 +17,7 @@ const NotificationsTable = ({ notifications }: NotificationsTableProps) => {
           <TableCaption className="sr-only">Latest Notifications</TableCaption>
           <TableBody>
             {notifications.map((notification) => (
-              <TableRow key={notification.id} className="border-b last:border-0">
+              <TableRow key={notification.id} className="shadow-sm border-b last:border-0 hover:cursor-default">
                 <TableCell className="p-2">
                   {notification.status === "unread" && (
                     <div className="w-2 h-2 rounded-full bg-blue-500"></div>
