@@ -1,3 +1,4 @@
+
 // Typdefinitionen für URL-Suchparameter
 declare type SearchParamProps = {
   params: { [key: string]: string };
@@ -129,7 +130,7 @@ declare interface User {
   name: string;
   email: string;
   password: string;
-  role: string;
+  role: UserRole;
   properties: Property[];
 }
 

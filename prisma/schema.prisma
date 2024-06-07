@@ -12,13 +12,6 @@ datasource db {
 enum UserRole {
   ADMIN
   USER
-  MANAGER_DEVELOPER
-  MARKETING
-  DEVELOPER
-  DEVOPS
-  MOBILE_DEV
-  CEO
-  TEST_USER
 }
 
 model User {
