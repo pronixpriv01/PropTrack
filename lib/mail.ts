@@ -18,7 +18,7 @@ export const sendPasswordResetEmail = async (
     email: string,
     token: string,
 ) => {
-    const resetLink = `http://localhost:3000/new-password?token=${token}`;
+    const resetLink = `https://www.pronixpriv.com/new-password?token=${token}`;
 
     await resend.emails.send({
         from: "onboarding@resend.dev",
@@ -32,7 +32,7 @@ export const sendVerificationEmail = async (
     email: string,
     token: string,
 ) => {
-    const confirmLink = `http://localhost:3000/new-verification?token=${token}`;
+    const confirmLink = `http://www.pronixpriv.com/new-verification?token=${token}`;
 
     await resend.emails.send({
         from: "onboarding@resend.dev",
