@@ -4,12 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { formatDateTime } from "@/lib/utils";
 
-const ScheudleCard = ({ scheduleItemsProps }: ScheduleCardProps) => {
+const ScheduleCard = ({ scheduleItemsProps }: ScheduleCardProps) => {
     const today = new Date().toISOString().split('T')[0];
     let todayEventCount = 0;
     let nextDayEventDisplayed = false;
 
-    const hasTodayEvents = scheduleItemsProps.some(scheudleItem => scheudleItem.date === today && scheudleItem.events.length > 0);
+    const hasTodayEvents = scheduleItemsProps.some(
+        (scheudleItem) => scheudleItem.date === today && scheudleItem.events && scheudleItem.events.length > 0
+    );
 
     return (
         <Card className="max-w-[440px] max-h-[590px] shadow-md rounded-2xl">
@@ -30,7 +32,7 @@ const ScheudleCard = ({ scheduleItemsProps }: ScheduleCardProps) => {
                     const displayDate = isToday ? `Heute - ${formattedDate}`: formattedDate;
 
                     if (isToday && todayEventCount < 2) {
-                        const eventsToShow = scheduleItem.events.slice(0, 2 - todayEventCount);
+                        const eventsToShow = scheduleItem.events?.slice(0, 2 - todayEventCount) || [];
                         todayEventCount += eventsToShow.length;
 
                         return (
@@ -43,8 +45,7 @@ const ScheudleCard = ({ scheduleItemsProps }: ScheduleCardProps) => {
                                         title={event.title}
                                         participants={event.participants}
                                         category={event.category}
-                                        type={event.type}
-                                    />
+                                        type={event.type} notificationTime={""}                                    />
                                 ))}
                                 {todayEventCount === 2 && <Separator/>}
                             </div>
@@ -54,14 +55,16 @@ const ScheudleCard = ({ scheduleItemsProps }: ScheduleCardProps) => {
                         return (
                             <div key={index} className="my-4">
                                 <p>{displayDate}</p>
-                                <ScheudleItem
-                                    key={0}
-                                    time={scheduleItem.events[0].time}
-                                    title={scheduleItem.events[0].title}
-                                    participants={scheduleItem.events[0].participants}
-                                    category={scheduleItem.events[0].category}
-                                    type={scheduleItem.events[0].type}
-                                />
+                                {scheduleItem.events && (
+                                    <ScheudleItem
+                                        key={0}
+                                        time={scheduleItem.events[0].time}
+                                        title={scheduleItem.events[0].title}
+                                        participants={scheduleItem.events[0].participants}
+                                        category={scheduleItem.events[0].category}
+                                        type={scheduleItem.events[0].type}
+                                        notificationTime={""}                                    />
+                                )}
                             </div>
                         );
                     } else {
@@ -79,4 +82,4 @@ const ScheudleCard = ({ scheduleItemsProps }: ScheduleCardProps) => {
     )
 }
 
-export default ScheudleCard;
+export default ScheduleCard;

@@ -9,7 +9,7 @@ declare type SearchParamProps = {
 type AccountRoles = "Manager Developer" | "Marketing" | "Developer" | "DevOps" | "Mobile Dev" | "CEO" | "TestUser";
 
 // Definition der Benachrichtigungstypen
-type NotificationType = "AccountRole" | "Reminder" | "Notification";
+type NotificationType = "assignment" | "status_change" | "general";
 
 // Definition der Badge-Variant
 type VariantType = "default" | "secondary" | "success" | "reminder" | "message" | "notification";
@@ -139,9 +139,9 @@ declare interface User {
 
 // Schnittstelle für Kategorie-Select
 declare interface CategorySelectProps {
-  categories: EventCategory[];
-  selectedCategory: EventCategory;
-  onChange: (category: EventCategory) => void;
+  categories: string[];
+  selectedCategory: string | null;
+  onChange: (value: string | null) => void;
 }
 
 // Schnittstelle für Kategorie-Badge
@@ -154,26 +154,6 @@ declare interface CategoryBadgeProps {
 declare interface DynamicBadgeProps {
   category: string;
   type: NotificationType;
-}
-
-// Schnittstelle für Benachrichtigung
-declare interface UserNotificationProps {
-  id: string;
-  category: string;
-  message: string;
-  date: Date;
-  status: "read" | "unread";
-  type: NotificationType;
-}
-
-// Schnittstelle für Benachrichtigungskarte
-declare interface NotificationCardProps {
-  notifications: UserNotificationProps[];
-}
-
-// Schnittstelle für Benachrichtigungstabelle
-declare interface NotificationsTableProps {
-  notifications: UserNotificationProps[];
 }
 
 // Schnittstelle für die rechte Seitenleiste
@@ -243,24 +223,108 @@ declare interface HeaderBoxProps {
   user?: string;
 }
 
+// Typdefinition für DynamicCombobox-Optionen
+declare interface DynamicComboboxOption<T> {
+  value: T;
+  label: string;
+}
+
+// Typdefinitionen für DynamicCombobox-Props
+declare interface DynamicComboboxProps<T extends string | number | boolean | symbol> {
+  options: DynamicComboboxOption<T>[];
+  value: T | null;
+  onChange: (value: T | null) => void;
+  placeholder?: string;
+}
+
+// Typdefinition für ParticipantsCombobox-Props
+declare interface ParticipantsComboboxProps {
+  paritcipants: string[];
+  selectedIser: string | null;
+  onChange: (value: string | null) => void;
+}
+
+// Typdefinition für PopoberCombobox-Props
+declare interface PopoverComboboxProps {
+  options: DynamicComboboxOption<string>[];
+  value: string | null;
+  onChange: (value: string | null) => void;
+  label?: string;
+  placeholder?: string;
+}
 // Schnittstelle für Ereignisse im Zeitplan
 declare interface ScheduleEventProps {
   time: string;
   title: string;
   participants: string[];
-  category: EventCategory;
-  type: EventType;
+  category: string;
+  type: string;
+  notificationTime: string;
 }
 
 // Schnittstelle für Zeitplan-Elemente
 declare interface ScheduleItemsProps {
   date: string;
-  events: ScheduleEventProps[];
+  events: ScheduleEventProps[] | null;
 }
 
 // Schnittstelle für Zeitplan-Karte
 declare interface ScheduleCardProps {
   scheduleItemsProps: ScheduleItemsProps[];
+}
+
+// Schnittstelle für Zeitplan-Dialog
+interface ScheduleDialogProps {
+  isOpen: boolean;
+  onClose: () => void;
+  scheduleItem: ScheduleEventProps | null;
+}
+
+interface ScheduleComboboxProps {
+  participants: string[];
+  selectedUser: string | null;
+  onChange: (user: string) => void;
+}
+
+declare interface NotificationProps {
+  id: string;
+  category: string;
+  title: string;
+  description: string;
+  message: string;
+  date: string;
+  status: 'unread' | 'read' | 'archived';
+  type: NotificationType;
+  userId: string;
+}
+
+declare interface NotificationManager {
+  add: (notification: Omit<NotificationProps, 'status'>) => void;
+  remove: (id: string) => void;
+  items: NotificationProps[];
+}
+
+declare interface NotificationConfig {
+  maxNotifications?: number;
+}
+
+// declare interface NotificationContextProps {
+//   notifications: NotificationProps[];
+//   addNotification: (notification: NotificationProps) => void;
+//   updateNotificationStatus: (id: string, status: 'unread' | 'read' | 'archived') => void;
+//   clearNotifications: () => void;
+// }
+
+// declare interface NotificationProviderProps {
+//   children: React.ReactNode;
+// }
+
+declare interface NotificationsTableProps {
+  notifications?: NotificationProps[];
+}
+
+declare interface NotificationCardProps {
+  notifications: NotificationProps[]
 }
 
 // Schnittstelle für Account-Rollenstile

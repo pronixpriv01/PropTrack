@@ -207,17 +207,31 @@ export function getEventCategoryStyles(category: string) {
 
 export function getNotificationStyle(category: string, type: NotificationType): any {
   switch (type) {
-    case "AccountRole":
+    case "assignment":
       return getAccountRoleStyles(category as AccountRoles);
 
-    case "Reminder":
+    case "status_change":
       return notificationsCategoryStyles["Reminder"];
 
-    case "Notification":
+    case "general":
       return notificationsCategoryStyles["Update"];
 
     default:
       return notificationsCategoryStyles["default"];
+  }
+}
+
+export function processNotification(type: NotificationType, message: string) {
+  switch (type) {
+    case "assignment":
+      console.log(`Neue Zuweisung: ${message}`);
+      break;
+    case "status_change":
+      console.log(`Statusänderung: ${message}`);
+      break;
+    case "general":
+      console.log(`Allgemeine Benachrichtigung: ${message}`);
+      break;
   }
 }
 

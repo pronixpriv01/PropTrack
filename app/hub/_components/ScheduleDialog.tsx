@@ -1,45 +1,73 @@
 import { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogTrigger, DialogClose } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import ScheduleCategoryBadge from "./ScheduleCategoryBadge";
 import CategorySelect from "./ScheduleDialogSelect";
-
-interface ScheduleDialogProps {
-    isOpen: boolean;
-    onClose: () => void;
-    scheduleItem: ScheduleEventProps | null;
-}
+import ParticipantsCombobox from "./ParticipantsCombobox";
+import ComboboxPopover from "./ComboboxPopover";
+import { BellIcon, ClipboardIcon, Clock, EditIcon, Trash2Icon } from "lucide-react";
+import ScheudleItem from './ScheduleItem';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { formatDateTime } from "@/lib/utils";
 
 const ScheduleDialog = ({ isOpen, onClose, scheduleItem }: ScheduleDialogProps) => {
-    const [selectedCategory, setSelectedCategory] = useState<EventCategory>(scheduleItem?.category || "Other");
-
     if (!scheduleItem) return null;
 
-    const categories: EventCategory[] = ["Meeting", "Interview", "Discussion", "Other"];
+    const { dateOnly, timeOnly } = formatDateTime(new Date(scheduleItem.time));
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
             <DialogContent>
-                <DialogHeader className="flex flex-row">
-                    <ScheduleCategoryBadge category={scheduleItem.category}/>
-                    <div className="flex flex-col ml-5 p-2 justify-between">
-                        <DialogTitle>{scheduleItem.title}</DialogTitle>
-                        <DialogDescription>{scheduleItem.time}</DialogDescription>
+                <DialogHeader className="flex flex-row justify-between items-center">
+                    <div className="flex items-center">
+                        <ScheduleCategoryBadge category={scheduleItem.category}/>
+                        <DialogTitle className="ml-4">{scheduleItem.title}</DialogTitle>
                     </div>
+                    {/* <DialogClose asChild>
+                        <Button variant="ghost" onClick={onClose}>
+                            <span aria-hidden>×</span>
+                        </Button>
+                    </DialogClose> */}
                 </DialogHeader>
-                <div>
-                    <p>Participants: {scheduleItem.participants.join(', ')}</p>
-                    <CategorySelect
-                        selectedCategory={selectedCategory}
-                        onChange={setSelectedCategory}
-                        categories={categories}
-                    />
-                    {/* <p>Category: {scheduleItem.category} </p> */}
-                    <p>Type: {scheduleItem.type}</p>
+                <div className="p-4">
+                    <div className="flex items-center space-x-2 mb-4">
+                        <Clock />
+                        <DialogDescription>{dateOnly}, {timeOnly}</DialogDescription>
+                    </div>
+                    <div className="flex items-center space-x-2 mb-2 ml-2">
+                        <span>Teilnehmer:</span>
+                    </div>
+                    {scheduleItem.participants.map((paricipant, index) => (
+                        <div key={index} className="flex items-center space-x-2 mb-4 ml-4">
+                            <Avatar>
+                                <AvatarImage src="icons/user.svg" alt="participant.name"/>
+                                <AvatarFallback>{paricipant[0]}</AvatarFallback>
+                            </Avatar>
+                            <div>
+                                <p>{paricipant}</p>
+                                <p className="text-sm text-gray-500">mustermail@root.de</p>
+                            </div>
+                        </div>
+                    ))}
+                    <div className="flex items-center justify-between space-x-2 mb-4">
+                        <a href="event/link" className="text-blue-500" target="_blank" rel="noopener noreferrer">
+                            <p>Event Link</p>
+                        </a>
+                        <ClipboardIcon />
+                    </div>
+                    <div className="flex items-center space-x-2 mb-4">
+                        <BellIcon />
+                        <DialogDescription>Benachrichtigung {scheduleItem.time} bevor</DialogDescription>
+                    </div>
+                    <div className="flex justify-end space-x-2 mt-4">
+                        <Button variant="ghost" onClick={() => console.log("Event bearbeiten")}>
+                            <EditIcon />
+                        </Button>
+                        <Button variant="ghost" onClick={() => console.log("Event löschen")}>
+                            <Trash2Icon />
+                        </Button>
+                    </div>
                 </div>
-                <DialogFooter>
-                    <Button onClick={onClose}>Close</Button>
-                </DialogFooter>
             </DialogContent>
         </Dialog>
     )

@@ -1,22 +1,18 @@
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectLabel, SelectItem } from "@/components/ui/select";
+import DynamicCombobox from "./DynamicCombox";
 
 const CategorySelect = ({ categories ,selectedCategory, onChange }: CategorySelectProps) => {
+    const options: DynamicComboboxOption<string>[] = categories.map(category => ({
+        value: category,
+        label: category
+    }))
+
     return (
-        <Select value={selectedCategory} onValueChange={onChange}>
-            <SelectTrigger>
-                <SelectValue placeholder="Kategorie auswählen" />
-            </SelectTrigger>
-            <SelectContent>
-                <SelectGroup>
-                    <SelectLabel>Kategorie:</SelectLabel>
-                    {categories.map((category, index) => (
-                        <SelectItem key={index} value={category}>
-                            {category}
-                        </SelectItem>
-                    ))}
-                </SelectGroup>
-            </SelectContent>
-        </Select>
+        <DynamicCombobox
+            options={options}
+            value={selectedCategory}
+            onChange={onChange}
+            placeholder="Kategorie asuwählen..."
+        />
     );
 };
 

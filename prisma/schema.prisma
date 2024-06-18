@@ -88,9 +88,11 @@ model Notification {
   id String @id @default(cuid())
   userId String
   category String
+  title String
+  description String
   message String
-  date DateTime
-  status String
+  date DateTime @default(now())
+  status String @default("unread") // Statuswerte: "unread", "read", "archived"
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
