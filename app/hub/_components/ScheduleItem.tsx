@@ -12,7 +12,7 @@ const categoryColors = {
     default: 'bg-gray-500',
   };
 
-const ScheudleItem = ({ time, title, participants, category, type }: ScheduleEventProps) => {
+const ScheudleItem = ({ time, title, participants, category, type, notificationTime }: ScheduleEventProps) => {
     const [isDialogOpen, setDialogOpen] = useState(false);
 
     const handleClick = () => {
@@ -37,7 +37,7 @@ const ScheudleItem = ({ time, title, participants, category, type }: ScheduleEve
             <ScheduleDialog 
                 isOpen={isDialogOpen}
                 onClose={() => setDialogOpen(false)}
-                scheduleItem={{time: formattedTime, title, participants, category, type }}
+                scheduleItem={{time: formattedTime, title, participants, category, type , notificationTime}}
             />
         </>
 

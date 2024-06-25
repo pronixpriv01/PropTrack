@@ -16,7 +16,7 @@ type VariantType = "default" | "secondary" | "success" | "reminder" | "message" 
 
 // Definition von Event-Kategorien und -Typen
 type EventCategory = "Meeting" | "Interview" | "Discussion" | "Other";
-type EventType = "Monthly Meeting" | "Psychological Test" | "Mid-year discussion" | "Other";
+type EventType = "Monthly Meeting" | "Daily Meeting" | "Mid-year discussion" | "Other";
 
 // Typdefinitionen für Anmeldedaten
 declare type SignUpParams = {
@@ -266,6 +266,10 @@ declare interface ScheduleEventProps {
 declare interface ScheduleItemsProps {
   date: string;
   events: ScheduleEventProps[] | null;
+}
+
+declare interface EventCardProps {
+  scheduleItem: ScheduleEventProps | null;
 }
 
 // Schnittstelle für Zeitplan-Karte

@@ -1,4 +1,4 @@
-import { UserRole } from '@prisma/client';
+import { UserRole, EventCategory, EventType } from '@prisma/client';
 import * as z from 'zod';
 
 export const SettingsSchema = z.object({
@@ -29,6 +29,13 @@ export const SettingsSchema = z.object({
         message: "Aktuelles Passwort ist erforderlich!",
         path: ["password"]
     });
+
+export const EventSchema = z.object({
+    time: z.optional(z.date()),
+    title: z.optional(z.string().min(1)),
+    category: z.enum([EventCategory.MEETING, EventCategory.INTERVIEW, EventCategory.DISCUSSION, EventCategory.OTHER]),
+    type: z.enum([EventType.DAILY_MEETING, EventType.MONTHLY_MEETING, EventType.MID_YEAR_DISCUSSION, EventType.OTHER]),
+})
 
 export const LoginSchema = z.object({
     email: z.string().email({
@@ -63,3 +70,11 @@ export const NewPasswordSchema = z.object({
         message: "Minimum 6 Zeichen erforderlich"
     }),
 })
+
+export const TaskSchema = z.object({
+    title: z.string().min(1, "Titel ist erforderlich"),
+    description: z.string().optional(),
+    dueDate: z.string().optional(),
+    eventId: z.string().uuid(),
+    userId: z.string().uuid(),
+});

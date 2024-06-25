@@ -11,54 +11,41 @@ import { z } from "zod";
 import { notificationsCategoryStyles } from "@/constants";
 
 // FORMAT DATE TIME
-export const formatDateTime = (dateString: Date) => {
+export const formatDateTime = (dateString: string | Date) => {
+  const date = new Date(dateString);
+  
   const dateTimeOptions: Intl.DateTimeFormatOptions = {
-    weekday: "short", // abbreviated weekday name (e.g., 'Mo.')
-    month: "short", // abbreviated month name (e.g., 'Okt.')
-    day: "numeric", // numeric day of the month (e.g., '25')
-    hour: "numeric", // numeric hour (e.g., '8')
-    minute: "numeric", // numeric minute (e.g., '30')
-    hour12: false, // use 12-hour clock (true) or 24-hour clock (false)
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    hour12: false,
   };
 
   const dateDayOptions: Intl.DateTimeFormatOptions = {
-    weekday: "short", // abbreviated weekday name (e.g., 'Mo.')
-    year: "numeric", // numeric year (e.g., '2023')
-    month: "2-digit", // numeric month (e.g., '10')
-    day: "2-digit", // numeric day of the month (e.g., '25')
+    weekday: "short",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
   };
 
   const dateOptions: Intl.DateTimeFormatOptions = {
-    month: "short", // abbreviated month name (e.g., 'Okt.')
-    year: "numeric", // numeric year (e.g., '2023')
-    day: "numeric", // numeric day of the month (e.g., '25')
+    month: "short",
+    year: "numeric",
+    day: "numeric",
   };
 
   const timeOptions: Intl.DateTimeFormatOptions = {
-    hour: "numeric", // numeric hour (e.g., '8')
-    minute: "numeric", // numeric minute (e.g., '30')
-    hour12: false, // use 12-hour clock (true) or 24-hour clock (false)
+    hour: "numeric",
+    minute: "numeric",
+    hour12: false,
   };
 
-  const formattedDateTime: string = new Date(dateString).toLocaleString(
-    "de-DE",
-    dateTimeOptions
-  );
-
-  const formattedDateDay: string = new Date(dateString).toLocaleString(
-    "de-DE",
-    dateDayOptions
-  );
-
-  const formattedDate: string = new Date(dateString).toLocaleString(
-    "de-DE",
-    dateOptions
-  );
-
-  const formattedTime: string = new Date(dateString).toLocaleString(
-    "de-DE",
-    timeOptions
-  );
+  const formattedDateTime: string = date.toLocaleString("de-DE", dateTimeOptions);
+  const formattedDateDay: string = date.toLocaleString("de-DE", dateDayOptions);
+  const formattedDate: string = date.toLocaleString("de-DE", dateOptions);
+  const formattedTime: string = date.toLocaleString("de-DE", timeOptions);
 
   return {
     dateTime: formattedDateTime,
@@ -67,6 +54,7 @@ export const formatDateTime = (dateString: Date) => {
     timeOnly: formattedTime,
   };
 };
+
 
 export function formatTimeAgo(date: Date): string {
   const now: Date = new Date();

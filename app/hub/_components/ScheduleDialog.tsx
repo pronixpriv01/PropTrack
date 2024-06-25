@@ -9,11 +9,12 @@ import { BellIcon, ClipboardIcon, Clock, EditIcon, Trash2Icon } from "lucide-rea
 import ScheudleItem from './ScheduleItem';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { formatDateTime } from "@/lib/utils";
+import { EventCard } from "./EventCard";
 
 const ScheduleDialog = ({ isOpen, onClose, scheduleItem }: ScheduleDialogProps) => {
     if (!scheduleItem) return null;
 
-    const { dateOnly, timeOnly } = formatDateTime(new Date(scheduleItem.time));
+    // const { dateOnly, timeOnly } = formatDateTime(new Date(scheduleItem.time));
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
@@ -29,7 +30,8 @@ const ScheduleDialog = ({ isOpen, onClose, scheduleItem }: ScheduleDialogProps) 
                         </Button>
                     </DialogClose> */}
                 </DialogHeader>
-                <div className="p-4">
+                <EventCard scheduleItem={scheduleItem} />
+                {/* <div className="p-4">
                     <div className="flex items-center space-x-2 mb-4">
                         <Clock />
                         <DialogDescription>{dateOnly}, {timeOnly}</DialogDescription>
@@ -39,12 +41,12 @@ const ScheduleDialog = ({ isOpen, onClose, scheduleItem }: ScheduleDialogProps) 
                     </div>
                     {scheduleItem.participants.map((paricipant, index) => (
                         <div key={index} className="flex items-center space-x-2 mb-4 ml-4">
-                            <Avatar>
+                            <Avatar className="bg-blackA1 inline-flex h-[24px] w-[24px] select-none items-center justify-center overflow-hidden rounded-full align-middle">
                                 <AvatarImage src="icons/user.svg" alt="participant.name"/>
                                 <AvatarFallback>{paricipant[0]}</AvatarFallback>
                             </Avatar>
                             <div>
-                                <p>{paricipant}</p>
+                                <p className="text-sm">{paricipant}</p>
                                 <p className="text-sm text-gray-500">mustermail@root.de</p>
                             </div>
                         </div>
@@ -67,7 +69,7 @@ const ScheduleDialog = ({ isOpen, onClose, scheduleItem }: ScheduleDialogProps) 
                             <Trash2Icon />
                         </Button>
                     </div>
-                </div>
+                </div> */}
             </DialogContent>
         </Dialog>
     )
