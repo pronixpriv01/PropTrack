@@ -11,6 +11,10 @@ import { cn, formatDateTime, formatTimeAgo, removeSpecialCharacters } from "@/li
 import DynamicBadge from "./DynamicBadge";
 
 const NotificationsTable = ({ notifications }: NotificationsTableProps) => {
+  if (!notifications || notifications.length === 0) {
+    return <p>Keine Benachrichtigungen</p>;
+  }
+
 
   const sortedNotifications = notifications.sort((a, b) => {
     return new Date(b.date).getTime() - new Date(a.date).getTime();
@@ -31,7 +35,11 @@ const NotificationsTable = ({ notifications }: NotificationsTableProps) => {
                   )}
                 </TableCell>
                 <TableCell className="p-2">
-                  <DynamicBadge category={notification.category} type={notification.type} />
+                  <DynamicBadge 
+                    category={notification.category} 
+                    type={notification.type}
+                    role={notification.role}
+                  />
                 </TableCell>
                 <TableCell className="p-2 text-gray-700">{notification.message}</TableCell>
                 <TableCell className="min-w-32 pl-2 pr-10">

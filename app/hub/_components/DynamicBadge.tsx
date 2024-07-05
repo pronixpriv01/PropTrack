@@ -12,13 +12,15 @@ const DynamicBadge = ({ category, type, role }: DynamicBadgeProps) => {
     );
   };
   
-  function determineBadgeVariant(category: string, type: NotificationType, role: AccountRoles): VariantType {
-    if (role === "Manager Developer") {
-      return "success";
-    } else if (role === "Marketing") {
-      return "secondary";
-    } else if (role === "CEO") {
-      return "message";
+  function determineBadgeVariant(category: string, type: NotificationType, role?: AccountRoles): VariantType {
+    if (role) {
+      if (role === "Manager Developer") {
+        return "success";
+      } else if (role === "Marketing") {
+        return "secondary";
+      } else if (role === "CEO") {
+        return "message";
+      }
     }
     
     if (type === "assignment") {

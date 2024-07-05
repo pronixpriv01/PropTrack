@@ -132,14 +132,14 @@ declare interface CategorySelectProps {
 declare interface CategoryBadgeProps {
   category: string;
   type: NotificationType;
-  role: AccountRoles;
+  role?: AccountRoles;
 }
 
 // Schnittstelle für dynamisches Badge
 declare interface DynamicBadgeProps {
   category: string;
   type: NotificationType;
-  role: AccountRoles;
+  role?: AccountRoles;
 }
 
 // Schnittstelle für die rechte Seitenleiste
@@ -292,6 +292,7 @@ declare interface NotificationProps {
   status: 'unread' | 'read' | 'archived';
   type: NotificationType;
   userId: string;
+  role?: AccountRoles;
 }
 
 declare interface NotificationManager {

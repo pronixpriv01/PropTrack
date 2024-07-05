@@ -1,4 +1,4 @@
-export const dummyNotifications: UserNotificationProps[] = [
+export const dummyNotifications: NotificationProps[] = [
     {
         id: "1",
         category: "Other",

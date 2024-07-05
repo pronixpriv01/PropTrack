@@ -11,7 +11,7 @@ const CategoryBadge = ({ category, type, role }: CategoryBadgeProps) => {
   
     return (
       <div>
-        {isAccountRole(role) ? (
+        {role && isAccountRole(role) ? (
           <Badge variant="success">
             {category}
           </Badge>
