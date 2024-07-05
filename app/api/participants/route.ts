@@ -4,11 +4,11 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export async function POST(req: NextRequest) {
-    const { taskId, userId } = await req.json();
+    const { eventId, userId } = await req.json();
 
     const participant = await prisma.participant.create({
         data: {
-            taskId,
+            eventId,
             userId,
         },
     });

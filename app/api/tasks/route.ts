@@ -6,9 +6,13 @@ const prisma = new PrismaClient();
 export async function GET() {
     const tasks = await prisma.task.findMany({
         include: {
-            participants: {
+            event: {
                 include: {
-                    user: true,
+                    participants: {
+                        include: {
+                            user: true,
+                        }
+                    }
                 }
             }
         }
