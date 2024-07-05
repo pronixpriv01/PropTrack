@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 
-const DynamicBadge = ({ category, type }: DynamicBadgeProps) => {
-    const badgeVariant = determineBadgeVariant(category, type);
+const DynamicBadge = ({ category, type, role }: DynamicBadgeProps) => {
+    const badgeVariant = determineBadgeVariant(category, type, role);
   
     return (
       <Badge 
@@ -12,26 +12,23 @@ const DynamicBadge = ({ category, type }: DynamicBadgeProps) => {
     );
   };
   
-  function determineBadgeVariant(category: string, type: NotificationType): VariantType {
-    if (type === "AccountRole") {
-      switch (category) {
-        case "Manager Developer":
-          return "success";
-        case "Marketing":
-          return "secondary";
-        default:
-          return "default";
-      }
-    } else if (type === "Reminder") {
-      return "reminder";
-    } else if (type === "Notification") {
-      if (category === "Message") {
-        return "message";
-      } else {
-        return "notification";
-      }
+  function determineBadgeVariant(category: string, type: NotificationType, role: AccountRoles): VariantType {
+    if (role === "Manager Developer") {
+      return "success";
+    } else if (role === "Marketing") {
+      return "secondary";
+    } else if (role === "CEO") {
+      return "message";
     }
-  
+    
+    if (type === "assignment") {
+      return "reminder";
+    } else if (type === "status_change") {
+      return "message";
+    } else if (type === "general") {
+      return "notification";
+    }
+
     // Fallback-Wert
     return "default";
   }

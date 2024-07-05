@@ -138,6 +138,7 @@ declare interface CategoryBadgeProps {
 declare interface DynamicBadgeProps {
   category: string;
   type: NotificationType;
+  role: AccountRoles;
 }
 
 // Schnittstelle für die rechte Seitenleiste
