@@ -1,45 +1,39 @@
 "use server"
 
+import * as z from "zod";
+
 import { db } from "@/lib/db";
 import { TaskSchema } from "@/schemas";
-import { error } from "console";
-import * as z from "zod"
 
-// Funktion zum Laden der Tasks
 export const loadTasks = async () => {
     try {
         const tasks = await db.task.findMany();
-        return tasks;
+        return { tasks };
     } catch (error) {
-        console.log('Fehler beim laden der Tasks:', error);
-        return { error: "Fehler beim laden der Tasks" }
+        return { error: "Fehler beim Laden der Tasks" };
     }
 }
 
-// Funktion zum Erstellen eines Tasks
-export const createTask = async (taskData: any) => {
-    // Validierung der Eingabedaten
+export const createTask = async (taskData: z.infer<typeof TaskSchema>) => {
     const parsedTaskData = TaskSchema.safeParse(taskData);
     if (!parsedTaskData.success) {
-        return { error: parsedTaskData.error.errors };
+        return { error: "Ungültige Felder" };
     }
 
     try {
         const createdTask = await db.task.create({
             data: parsedTaskData.data,
-        })
-        return createdTask;
+        });
+        return { success: "Aufgabe erfolgrecih erstellt!", task: createdTask };
     } catch (error) {
-        return { error: "Fehler beim erstellen eines Tasks"}
+        return { error: "Fehler beim Erstellen einer Aufgabe" };
     }
 }
 
-// Funktion zum Aktualisieren eines Tasks
-export const updateTask = async (taskId: string, taskData: any) => {
-    // Validierung der Eingabedaten
+export const updateTask = async (taskId: string, taskData: z.infer<typeof TaskSchema>) => {
     const parsedTaskData = TaskSchema.safeParse(taskData);
     if (!parsedTaskData.success) {
-        return { error: parsedTaskData.error.errors };
+        return { error: "Ungültige Felder!" };
     }
 
     try {
@@ -47,20 +41,19 @@ export const updateTask = async (taskId: string, taskData: any) => {
             where: { id: taskId },
             data: parsedTaskData.data,
         });
-        return updatedTask;
+        return {success: "Aufgabe erfolgreich aktualiseiert!", task: updatedTask};
     } catch (error) {
-        return { error: "Fehler beim speichern des Tasks" }
+        return { error: "Fehler beim Speichern der Aufgabe" };
     }
 }
 
-// Funktion zum Löschen eines Tasks
 export const deleteTask = async (taskId: string) => {
     try {
         await db.task.delete({
-            where: { id: taskId },
-        });
-        return { success: "Task erfolgrecih gelöscht" };
+            where: { id: taskId } 
+        })
+        return { success: "Aufgabe erfolgreich gelöscht!" };
     } catch (error) {
-        return { error: "Fehler beim löschen des Tasks" };
+        return { error: "Fehler beim Löschen der Aufgabe" };
     }
 }

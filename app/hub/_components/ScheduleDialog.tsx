@@ -24,11 +24,11 @@ const ScheduleDialog = ({ isOpen, onClose, scheduleItem }: ScheduleDialogProps) 
                         <ScheduleCategoryBadge category={scheduleItem.category}/>
                         <DialogTitle className="ml-4">{scheduleItem.title}</DialogTitle>
                     </div>
-                    {/* <DialogClose asChild>
+                    <DialogClose asChild>
                         <Button variant="ghost" onClick={onClose}>
                             <span aria-hidden>×</span>
                         </Button>
-                    </DialogClose> */}
+                    </DialogClose>
                 </DialogHeader>
                 <EventCard scheduleItem={scheduleItem} />
                 {/* <div className="p-4">

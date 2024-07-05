@@ -39,22 +39,6 @@ declare type NewUserParams = {
   name: string;
   password: string;
 };
-
-// Typdefinitionen für Eigenschaften
-declare type Property = {
-  propertyId: string;
-  name: string;
-  location: string;
-  totalUnits: number;
-  vacantUnits: number;
-  occupiedUnits: number;
-  maintenanceUnits: number;
-  userId: string;
-  units: Unit[];
-  tasks: Task[];
-  reports: Report[];
-};
-
 // Typdefinitionen für Einheiten
 declare type Unit = {
   unitId: string;
@@ -271,6 +255,12 @@ declare interface ScheduleItemsProps {
 declare interface EventCardProps {
   scheduleItem: ScheduleEventProps | null;
 }
+
+declare interface EventFormProps {
+  existingEvent?: z.infer<typeof EventSchema>;
+  users: User[];
+}
+
 
 // Schnittstelle für Zeitplan-Karte
 declare interface ScheduleCardProps {

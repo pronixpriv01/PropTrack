@@ -23,6 +23,8 @@ import { useState } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import ParticipantItem from "./EventCardParticipantItem";
+import { CardWrapper } from "@/components/auth/CardWrapper";
+import EventForm from "./EventForm/EventForm";
 
 export const EventCard = ({ scheduleItem }: EventCardProps) => {
   if (!scheduleItem) return null;
@@ -53,10 +55,11 @@ export const EventCard = ({ scheduleItem }: EventCardProps) => {
 
   return (
     <Tabs defaultValue="infos" className="max-w-[450px]">
-      <TabsList className="grid w-full grid-cols-3">
+      <TabsList className="grid w-full grid-cols-4">
         <TabsTrigger value="infos">Infos</TabsTrigger>
         <TabsTrigger value="tasks">Tasks</TabsTrigger>
         <TabsTrigger value="notifications">Benachrichtigungen</TabsTrigger>
+        <TabsTrigger value="demo">Demo</TabsTrigger>
       </TabsList>
       <TabsContent value="infos">
         <Card>
@@ -155,6 +158,13 @@ export const EventCard = ({ scheduleItem }: EventCardProps) => {
               <span className="text-sm ml-2">Benachrichtigung 2</span>
             </div>
             {/* Weitere Benachrichtigungen hier hinzufügen */}
+          </CardContent>
+        </Card>
+      </TabsContent>
+      <TabsContent value="demo">
+        <Card>
+          <CardContent>
+            <EventForm users={[]}/>
           </CardContent>
         </Card>
       </TabsContent>

@@ -16,7 +16,7 @@ export const SettingsSchema = z.object({
         
         return true;
     }, {
-        message: "Neues passwort ist erforderlich!",
+        message: "Neues Passwort ist erforderlich!",
         path: ["newPassword"]
     })
     .refine((data) => {
@@ -29,13 +29,6 @@ export const SettingsSchema = z.object({
         message: "Aktuelles Passwort ist erforderlich!",
         path: ["password"]
     });
-
-export const EventSchema = z.object({
-    time: z.optional(z.date()),
-    title: z.optional(z.string().min(1)),
-    category: z.enum([EventCategory.MEETING, EventCategory.INTERVIEW, EventCategory.DISCUSSION, EventCategory.OTHER]),
-    type: z.enum([EventType.DAILY_MEETING, EventType.MONTHLY_MEETING, EventType.MID_YEAR_DISCUSSION, EventType.OTHER]),
-})
 
 export const LoginSchema = z.object({
     email: z.string().email({
@@ -71,10 +64,31 @@ export const NewPasswordSchema = z.object({
     }),
 })
 
+export const EventSchema = z.object({
+    id: z.string().uuid().optional(),
+    title: z.string(),
+    description: z.string().optional(),
+    category: z.array(z.enum([EventCategory.INTERVIEW, EventCategory.DISCUSSION, EventCategory.MEETING, EventCategory.OTHER])),
+    type: z.array(z.enum([EventType.DAILY_MEETING, EventType.MID_YEAR_DISCUSSION, EventType.MONTHLY_MEETING, EventType.OTHER])),
+    date: z.date(),
+    userId: z.string().uuid(),
+    participants: z.array(z.string().uuid()), // array of user IDs
+});
+
 export const TaskSchema = z.object({
+    id: z.string().uuid().optional(),
     title: z.string().min(1, "Titel ist erforderlich"),
     description: z.string().optional(),
-    dueDate: z.string().optional(),
+    dueDate: z.date().optional(),
     eventId: z.string().uuid(),
     userId: z.string().uuid(),
 });
+
+export const ParticipantSchema = z.object({
+    eventId: z.string().uuid(),
+    userId: z.string().uuid(),
+});
+
+export type Event = z.infer<typeof EventSchema>;
+export type Task = z.infer<typeof TaskSchema>;
+export type Participant = z.infer<typeof ParticipantSchema>;
