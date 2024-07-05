@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { notificationsCategoryStyles } from "@/constants"
 import { cn, getAccountRoleStyles } from "@/lib/utils";
 
-const CategoryBadge = ({ category, type }: CategoryBadgeProps) => {
+const CategoryBadge = ({ category, type, role }: CategoryBadgeProps) => {
     const categoryStyle = notificationsCategoryStyles[category as keyof typeof notificationsCategoryStyles] || notificationsCategoryStyles.default;
   
     const isAccountRole = (role: string): role is AccountRoles => {
@@ -11,7 +11,7 @@ const CategoryBadge = ({ category, type }: CategoryBadgeProps) => {
   
     return (
       <div>
-        {type === "AccountRole" && isAccountRole(category) ? (
+        {isAccountRole(role) ? (
           <Badge variant="success">
             {category}
           </Badge>
@@ -19,7 +19,7 @@ const CategoryBadge = ({ category, type }: CategoryBadgeProps) => {
           <div className={cn('category-badge flex items-center', categoryStyle.borderColor, categoryStyle.chipBackgroundColor)}>
             <div className={cn('size-2 rounded-full', categoryStyle.backgroundColor)} />
             <p className={cn('text-[12px] font-medium', categoryStyle.textColor, 'ml-2')}>
-              {type === "Reminder" ? (
+              {type === "general" ? (
                 <Badge variant="default">{category}</Badge>
               ) : category}
             </p>

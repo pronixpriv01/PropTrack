@@ -132,6 +132,7 @@ declare interface CategorySelectProps {
 declare interface CategoryBadgeProps {
   category: string;
   type: NotificationType;
+  role: AccountRoles;
 }
 
 // Schnittstelle für dynamisches Badge
