@@ -6,7 +6,7 @@ import { AuthError } from "next-auth";
 
 import { db } from "@/lib/db";
 import { signIn } from "@/auth"
-import { LoginSchema } from "@/schemas";
+import { GuestSchema, LoginSchema } from "@/schemas";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 
 import {
@@ -20,14 +20,14 @@ import {
 } from "@/lib/mail";
 
 import { getTwoFactorTokenByEmail } from "@/lib/actions/twoFactorToken.actions";
-import { getUserByEmail } from "@/lib/actions/user.actions";
+import { getUserByEmail, getUserByName } from "@/lib/actions/user.actions";
 import { getTwoFactorConfirmationByUserId } from "@/lib/actions/twoFactorConfirmation.actions";
 
 export const login = async (values: z.infer<typeof LoginSchema>) => {
     const validatedFields = LoginSchema.safeParse(values);
 
     if (!validatedFields.success) {
-        return { error: "Invaild fields!" };
+        return { error: "Ungültige Felder!" };
     }
 
     const { email, password, code } = validatedFields.data;

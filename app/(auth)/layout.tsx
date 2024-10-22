@@ -8,11 +8,11 @@ export default function RootLayout({
     return (
       <main className="flex min-h-screen w-full justify-between font-inter">
           {children}
-          <div className="auth-asset">
+          {/* <div className="auth-asset">
             <div>
               Login Seite Layout
             </div>
-          </div>
+          </div> */}
       </main>
     );
 }

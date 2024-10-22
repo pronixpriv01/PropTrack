@@ -36,3 +36,6 @@ export const apiAuthPrefix = "/api/auth";
  * @type {string}
  */
 export const DEFAULT_LOGIN_REDIRECT = "/client";
+// routes.ts
+
+export const DEFAULT_GUEST_REDIRECT = "/guest/dashboard";

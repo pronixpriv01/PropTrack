@@ -1,5 +1,4 @@
-import * as z from "zod"
-
+import * as z from "zod";
 import { createEvent, updateEvent, addParticipant, removeParticipant } from "@/lib/actions/event.actions";
 import { EventSchema } from "@/schemas";
 

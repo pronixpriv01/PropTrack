@@ -30,6 +30,13 @@ export const SettingsSchema = z.object({
         path: ["password"]
     });
 
+export const GuestSchema = z.object({
+    name: z.optional(z.string().min(1, {
+        message: "Ein Benutzername ist erfolderlich!"
+    })),
+    refcode: z.optional(z.string()),
+})
+
 export const LoginSchema = z.object({
     email: z.string().email({
         message: "Gültige Email erforderlich"
@@ -38,6 +45,7 @@ export const LoginSchema = z.object({
         message: "Password erforderlich"
     }),
     code: z.optional(z.string()),
+    isGuest: z.optional(z.boolean()),
 });
 
 export const RegisterSchema = z.object({

@@ -32,6 +32,7 @@ import { FormError } from "@/components/FormError";
 import { FormSuccess } from "../FormSuccess";
 import { login } from "@/lib/actions/login.actions";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
+import usePreventZoom from "@/hooks/usePreventZoom";
 
 export const LoginForm = () => {
     const searchParams = useSearchParams();
@@ -77,6 +78,8 @@ export const LoginForm = () => {
         });
     }
 
+    usePreventZoom();
+
     return (
         <CardWrapper
             headerLabel="Wilkommen zurück"
@@ -89,7 +92,7 @@ export const LoginForm = () => {
                     onSubmit={form.handleSubmit(onSubmit)}
                     className="space-y-6"
                 >
-                    <div className="space-y-4">
+                    <div className="space-y-4 md:w-auto">
                         {showTwoFactor && (
                             <FormField
                                 control={form.control}
@@ -134,6 +137,7 @@ export const LoginForm = () => {
                                                     disabled={isPending}
                                                     placeholder="example@email.com"
                                                     type="email"
+                                                    className="text-base"
                                                 />
                                             </FormControl>
                                             <FormMessage />
@@ -152,6 +156,7 @@ export const LoginForm = () => {
                                                     disabled={isPending}
                                                     placeholder="Gebe dein Passwort ein"
                                                     type="password"
+                                                    className="text-base"
                                                 />
                                             </FormControl>
                                             <Button
@@ -161,7 +166,7 @@ export const LoginForm = () => {
                                                 className="px-0 font-normal"
                                             >
                                                 <Link href="/auth/reset">
-                                                    Passwort vergessen?
+                                                    <p className="text-neutral-500">Passwort vergessen?</p>
                                                 </Link>
                                             </Button>
                                             <FormMessage />

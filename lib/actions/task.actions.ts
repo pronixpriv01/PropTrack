@@ -24,7 +24,7 @@ export const createTask = async (taskData: z.infer<typeof TaskSchema>) => {
         const createdTask = await db.task.create({
             data: parsedTaskData.data,
         });
-        return { success: "Aufgabe erfolgrecih erstellt!", task: createdTask };
+        return { success: "Aufgabe erfolgreich erstellt!", task: createdTask };
     } catch (error) {
         return { error: "Fehler beim Erstellen einer Aufgabe" };
     }

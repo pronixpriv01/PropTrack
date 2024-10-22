@@ -2,7 +2,7 @@
 
 import * as z from "zod";
 
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/FormError";
 import { FormSuccess } from "../FormSuccess";
 import { register } from "@/lib/actions/register.actions";
+import usePreventZoom from "@/hooks/usePreventZoom";
 
 export const RegisterForm = () => {
     const [error, setError] = useState<string | undefined>("");
@@ -50,6 +51,8 @@ export const RegisterForm = () => {
         });
     }
 
+    usePreventZoom();
+
     return (
         <CardWrapper
             headerLabel="Erstelle ein Konto"
@@ -62,7 +65,7 @@ export const RegisterForm = () => {
                     onSubmit={form.handleSubmit(onSubmit)}
                     className="space-y-6"
                 >
-                    <div className="space-y-4">
+                    <div className="space-y-4 md:w-auto">
                         <FormField
                             control={form.control}
                             name="name"
@@ -74,6 +77,7 @@ export const RegisterForm = () => {
                                             {...field}
                                             disabled={isPending}
                                             placeholder="Alvin Martinez"
+                                            className="text-base"
                                         />
                                     </FormControl>
                                     <FormMessage />
@@ -92,6 +96,7 @@ export const RegisterForm = () => {
                                             disabled={isPending}
                                             placeholder="example@email.com"
                                             type="email"
+                                            className="text-base"
                                         />
                                     </FormControl>
                                     <FormMessage />
@@ -110,6 +115,7 @@ export const RegisterForm = () => {
                                             disabled={isPending}
                                             placeholder="Gebe dein Password ein"
                                             type="password"
+                                            className="text-base"
                                         />
                                     </FormControl>
                                     <FormMessage />

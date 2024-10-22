@@ -3,7 +3,7 @@ import React from 'react';
 
 const SignUpPage = () => {
     return (
-        <div className="felx-center size-full max-sm:px-6">
+        <div className="flex-center md:w-max-[250px] max-sm:w-max-[150px] pt-2">
             <RegisterForm />
         </div>
     )

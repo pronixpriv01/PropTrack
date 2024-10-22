@@ -17,7 +17,7 @@ CREATE TABLE "User" (
     "password" TEXT,
     "role" "UserRole" NOT NULL DEFAULT 'USER',
     "isTwoFactorEnabled" BOOLEAN NOT NULL DEFAULT false,
-
+ 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
 

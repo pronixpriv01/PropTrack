@@ -50,6 +50,7 @@ import { settings } from "@/lib/actions/settings.actions";
 // //* Hooks
 import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { UserRole } from "@prisma/client";
+import usePreventZoom from '@/hooks/usePreventZoom';
 
 const SettingsPage = () => {
     const user = useCurrentUser();
@@ -73,6 +74,9 @@ const SettingsPage = () => {
     });
 
     const onSubmit = (values: z.infer<typeof SettingsSchema>) => {
+        setError("");
+        setSuccess("");
+
         startTransition(() => {
             settings(values)
                 .then((data) => {
@@ -89,9 +93,8 @@ const SettingsPage = () => {
         })
     }
 
-
     return (
-        <Card className="w-[600px]">
+        <Card className="w-auto">
             <CardHeader>
                 <div className="flex flex-row justify-center items-center gap-2">
                     <Settings
@@ -242,6 +245,7 @@ const SettingsPage = () => {
                         <FormError message={error} />
                         <FormSuccess message={success} />
                         <Button
+                            className="w-full"
                             disabled={isPending}
                             type="submit"
                         >
